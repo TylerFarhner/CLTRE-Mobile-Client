@@ -5,3 +5,5 @@ This is a mobile application to connect and unite the Cannabis community, be it 
 * React-Navigation - npm install @react-navigation/native
 * expo install react-native-screens react-native-safe-area-context
 * npm install @react-navigation/native-stack
+* formik
+* yup
