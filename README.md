@@ -7,3 +7,4 @@ This is a mobile application to connect and unite the Cannabis community, be it 
 * npm install @react-navigation/native-stack
 * formik
 * yup
+* redux react-redux redux-thunk redux-devtools-extensions
