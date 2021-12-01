@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, View, Text, ScrollView, KeyboardAvoidingView, TextInput, Image, TouchableOpacity } from 'react-native'
 import { Formik } from 'formik'
 
-export default function LoginScreen(navData) {
+export default function RegisterScreen(navData) {
 
     return(
         <KeyboardAvoidingView
@@ -11,6 +11,7 @@ export default function LoginScreen(navData) {
             
                 <Formik
                     initialValues={{
+                        firstName: "",
                         email: "",
                         password: ""
                     }}
@@ -25,6 +26,15 @@ export default function LoginScreen(navData) {
                                 <Image source={require('../assets/images/MobileLogo.png')} style={styles.image}/>
                             </View>
                             <View>
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder="Full Name"
+                                    placeholderTextColor="#fff"
+                                    // state management
+                                    onChangeText={props.handleChange('fullName')}
+                                    // enable two way binding
+                                    value={props.values.fullName}
+                                />
                                 <TextInput
                                     style={styles.input}
                                     placeholder="Email"
@@ -49,14 +59,14 @@ export default function LoginScreen(navData) {
                                     style={styles.button}
                                     onPress={props.handleSubmit}
                                 >
-                                    <Text style={styles.buttonText}>Login</Text>
+                                    <Text style={styles.buttonText}>Register</Text>
                                 </TouchableOpacity>
                                 <View style={styles.registerContainer}>
-                                    <Text style={styles.registerText}>Don't have an account?</Text>
+                                    <Text style={styles.registerText}>Have an account?</Text>
                                     <TouchableOpacity
-                                        onPress={() => navData.navigation.navigate('Register')}
+                                        onPress={() => navData.navigation.navigate('Login')}
                                     >
-                                        <Text style={styles.registerButton}>Register</Text>
+                                        <Text style={styles.registerButton}>Login</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
