@@ -28,7 +28,7 @@ function AppNavigator() {
                     name="Home"
                     component={HomeScreen}
                     // TODO: Figure out why headerLeft: null wont remove back option IOS or Android
-                    options={{ headerLeft: null }}
+                    options={{ headerShown: false }}
                 />
             </Stack.Navigator>
         </NavigationContainer>
