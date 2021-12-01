@@ -1,81 +1,97 @@
 import React from 'react'
 import { StyleSheet, View, Text, ScrollView, KeyboardAvoidingView, TextInput, Image, TouchableOpacity } from 'react-native'
 import { Formik } from 'formik'
+import * as yup from 'yup'
+
+const formSchema = yup.object({
+    // Want to validate email and PW using Yup
+    fullName: yup.string().required().min(3),
+    email: yup.string().email().required(),
+    password: yup.string().required().min(6)
+})
 
 export default function RegisterScreen(navData) {
 
     return(
         <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding": "height"} 
-        style={{ flex: 1 }}>
-            
-                <Formik
-                    initialValues={{
-                        firstName: "",
-                        email: "",
-                        password: ""
-                    }}
-                    onSubmit={(values) => {
-                        console.log(values)
-                        navData.navigation.navigate('Home')
-                    }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1 }}
+    >
+      <Formik
+        initialValues={{
+          fullName: "",
+          email: "",
+          password: "",
+        }}
+        validationSchema={formSchema}
+        onSubmit={(values) => {
+          console.log(values);
+          navData.navigation.navigate("Home");
+        }}
+      >
+        {(props) => (
+          <View style={styles.container}>
+            <View style={styles.logo}>
+              <Image
+                source={require("../assets/images/MobileLogo.png")}
+                style={styles.image}
+              />
+            </View>
+            <View>
+              <TextInput
+                style={styles.input}
+                placeholder="Full Name"
+                placeholderTextColor="#fff"
+                onChangeText={props.handleChange("fullName")}
+                value={props.values.fullName}
+                onBlur={props.handleBlur("fullName")}
+              />
+              <Text style={styles.error}>
+                {props.touched.fullName && props.errors.fullName}
+              </Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Email"
+                placeholderTextColor="#fff"
+                keyboardType="email-address"
+                onChangeText={props.handleChange("email")}
+                value={props.values.email}
+                onBlur={props.handleBlur("email")}
+              />
+              <Text style={styles.error}>
+                {props.touched.email && props.errors.email}
+              </Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Password"
+                placeholderTextColor="#fff"
+                secureTextEntry={true}
+                onChangeText={props.handleChange("password")}
+                value={props.values.password}
+                onBlur={props.handleBlur("password")}
+              />
+              <Text style={styles.error}>
+                {props.touched.password && props.errors.password}
+              </Text>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={props.handleSubmit}
+              >
+                <Text style={styles.buttonText}>Register</Text>
+              </TouchableOpacity>
+              <View style={styles.registerContainer}>
+                <Text style={styles.registerText}>Have an account?</Text>
+                <TouchableOpacity
+                  onPress={() => navData.navigation.navigate("Login")}
                 >
-                    {(props) => (
-                        <View style={styles.container}>
-                            <View style={styles.logo}>
-                                <Image source={require('../assets/images/MobileLogo.png')} style={styles.image}/>
-                            </View>
-                            <View>
-                                <TextInput
-                                    style={styles.input}
-                                    placeholder="Full Name"
-                                    placeholderTextColor="#fff"
-                                    // state management
-                                    onChangeText={props.handleChange('fullName')}
-                                    // enable two way binding
-                                    value={props.values.fullName}
-                                />
-                                <TextInput
-                                    style={styles.input}
-                                    placeholder="Email"
-                                    placeholderTextColor="#fff"
-                                    keyboardType="email-address"
-                                    // state management
-                                    onChangeText={props.handleChange('email')}
-                                    // enable two way binding
-                                    value={props.values.email}
-                                />
-                                <TextInput
-                                    style={styles.input}
-                                    placeholder="Password"
-                                    placeholderTextColor="#fff"
-                                    secureTextEntry={true}
-                                    // state management
-                                    onChangeText={props.handleChange('password')}
-                                    // enable two way binding
-                                    value={props.values.password}
-                                />
-                                <TouchableOpacity 
-                                    style={styles.button}
-                                    onPress={props.handleSubmit}
-                                >
-                                    <Text style={styles.buttonText}>Register</Text>
-                                </TouchableOpacity>
-                                <View style={styles.registerContainer}>
-                                    <Text style={styles.registerText}>Have an account?</Text>
-                                    <TouchableOpacity
-                                        onPress={() => navData.navigation.navigate('Login')}
-                                    >
-                                        <Text style={styles.registerButton}>Login</Text>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </View>
-                    )}
-
-                </Formik>
-
-        </KeyboardAvoidingView>
+                  <Text style={styles.registerButton}>Login</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        )}
+      </Formik>
+    </KeyboardAvoidingView>
     )
 }
 
@@ -84,7 +100,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#ffffff",
+        backgroundColor: "black",
     },
     logo: {
         alignItems: "center",

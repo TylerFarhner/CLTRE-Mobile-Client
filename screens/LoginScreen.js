@@ -1,6 +1,13 @@
 import React from 'react'
 import { StyleSheet, View, Text, ScrollView, KeyboardAvoidingView, TextInput, Image, TouchableOpacity } from 'react-native'
 import { Formik } from 'formik'
+import * as yup from 'yup'
+
+const formSchema = yup.object({
+    // Want to validate email and PW using Yup
+    email: yup.string().email().required(),
+    password: yup.string().required().min(6)
+})
 
 export default function LoginScreen(navData) {
 
@@ -14,6 +21,7 @@ export default function LoginScreen(navData) {
                         email: "",
                         password: ""
                     }}
+                    validationSchema={ formSchema }
                     onSubmit={(values) => {
                         console.log(values)
                         navData.navigation.navigate('Home')
@@ -34,7 +42,9 @@ export default function LoginScreen(navData) {
                                     onChangeText={props.handleChange('email')}
                                     // enable two way binding
                                     value={props.values.email}
+                                    onBlur={ props.handleBlur('email') }
                                 />
+                                <Text style={styles.error}>{props.touched.email && props.errors.email}</Text>
                                 <TextInput
                                     style={styles.input}
                                     placeholder="Password"
@@ -44,7 +54,9 @@ export default function LoginScreen(navData) {
                                     onChangeText={props.handleChange('password')}
                                     // enable two way binding
                                     value={props.values.password}
+                                    onBlur={ props.handleBlur('password') }
                                 />
+                                <Text style={styles.error}>{props.touched.password && props.errors.password}</Text>
                                 <TouchableOpacity 
                                     style={styles.button}
                                     onPress={props.handleSubmit}
@@ -74,7 +86,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#ffffff",
+        backgroundColor: "black",
     },
     logo: {
         alignItems: "center",
