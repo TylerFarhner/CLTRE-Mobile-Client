@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, ScrollView, KeyboardAvoidingView, TextInput, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Text, ScrollView, KeyboardAvoidingView, TextInput, Image, TouchableOpacity, Alert } from 'react-native'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import { useDispatch } from 'react-redux'
@@ -30,8 +30,14 @@ export default function LoginScreen(navData) {
                     onSubmit={(values) => {
                         // console.log(values)
                         dispatch(authAction.loginUser(values))
-                            .then(() => {
-                                navData.navigation.navigate('Home')
+                            .then(result => {
+                                console.log(result)
+                                if(result.success) {
+                                    navData.navigation.navigate('Home')
+                                } else {
+                                    Alert.alert(result.message)
+                                }
+                                
                             })
                             .catch(err => console.log(err))
                         

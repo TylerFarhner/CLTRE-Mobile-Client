@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, ScrollView, KeyboardAvoidingView, TextInput, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Text, ScrollView, KeyboardAvoidingView, TextInput, Image, TouchableOpacity, Alert } from 'react-native'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import { useDispatch } from 'react-redux'
@@ -32,8 +32,12 @@ export default function RegisterScreen(navData) {
             onSubmit={(values) => {
             // console.log(values);
             dispatch(authAction.registerUser(values))
-                .then(() => {
-                    navData.navigation.navigate("Home");
+                .then(result => {
+                    if(result.success) {
+                        navData.navigation.navigate("Home");
+                    } else {
+                        Alert.alert('Registration failed. Try again.')
+                    }
                 })
                 .catch((err => console.log(err)))
             
