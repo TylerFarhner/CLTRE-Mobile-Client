@@ -5,6 +5,10 @@ export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS'
 export const LOGIN_USER_FAIL = 'LOGIN_USER_FAIL'
 
 const BASE_URL = 'http://10.0.0.148:3000';
+// HOME IP
+
+// SAMs IP
+// const BASE_URL = 'http://192.168.4.27'
 
 export const registerUser = (authData) => {
     const { fullName, email, password } = authData;

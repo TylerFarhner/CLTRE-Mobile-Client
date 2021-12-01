@@ -3,39 +3,41 @@ import { StyleSheet, View, Text, Button } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const jwtDecode = require('jwt-decode')
 
-export default function HomeScreen(props) {
 
-    const [fullName, setFullName] = useState('')
-    const [email, setEmail] = useState('')
 
-    const loadProfile = async () => {
-        const token = await AsyncStorage.getItem('token')
-        if(!token) {
-            props.navigation.navigate('Login')
-        }
+export default function HomeScreen({navigation}) {
 
-        const decoded = jwtDecode(token)
-        setFullName(decoded.fullName)
-        setEmail(decoded.email)
+    // const [fullName, setFullName] = useState('')
+    // const [email, setEmail] = useState('')
 
-        // console.log(token)
-    }
+    // const loadProfile = async () => {
+    //     const token = await AsyncStorage.getItem('token')
+    //     if(!token) {
+    //         props.navigation.navigate('Login')
+    //     }
 
-    const logout = props => {
-        AsyncStorage.removeItem('token')
-            .then(() => {
-                props.navigation.replace('Login')
-            })
-            .catch(err => console.log(err))
-    }
+    //     const decoded = jwtDecode(token)
+    //     setFullName(decoded.fullName)
+    //     setEmail(decoded.email)
 
-    useEffect(() => {
-        loadProfile()
-    })
+    //     // console.log(token)
+    // }
+
+    // const logout = props => {
+    //     AsyncStorage.removeItem('token')
+    //         .then(() => {
+    //             props.navigation.replace('Login')
+    //         })
+    //         .catch(err => console.log(err))
+    // }
+
+    // useEffect(() => {
+    //     loadProfile()
+    // })
 
     return(
         <View style={styles.container}>
-            <View>
+            {/* <View>
                 <Text style={styles.text}>Welcome {fullName ? fullName : ''}</Text>
             </View>
             <View>
@@ -46,7 +48,11 @@ export default function HomeScreen(props) {
                     title="Logout"
                     onPress={ () => logout(props) }
                 />
-            </View>
+            </View> */}
+            <Button
+                title="My Profile"
+                onPress={() => navigation.navigate('Profile')}
+            />
         </View>
     )
 }
