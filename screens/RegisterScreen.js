@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, ScrollView, KeyboardAvoidingView, TextInput, Im
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import { useDispatch } from 'react-redux'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import * as authAction from '../redux/actions/authAction'
 
@@ -32,9 +33,14 @@ export default function RegisterScreen(navData) {
             onSubmit={(values) => {
             // console.log(values);
             dispatch(authAction.registerUser(values))
-                .then(result => {
+                .then(async result => {
                     if(result.success) {
-                        navData.navigation.navigate("Home");
+                        try {
+                            await AsyncStorage.setItem('token', result.token)
+                            navData.navigation.navigate("Home");
+                        } catch(err) {
+                            console.log(err)
+                        }
                     } else {
                         Alert.alert('Registration failed. Try again.')
                     }

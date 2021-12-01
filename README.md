@@ -8,3 +8,4 @@ This is a mobile application to connect and unite the Cannabis community, be it 
 * formik
 * yup
 * redux react-redux redux-thunk redux-devtools-extensions
+* @react-native-async-storage/async-storage
