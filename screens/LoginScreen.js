@@ -2,6 +2,9 @@ import React from 'react'
 import { StyleSheet, View, Text, ScrollView, KeyboardAvoidingView, TextInput, Image, TouchableOpacity } from 'react-native'
 import { Formik } from 'formik'
 import * as yup from 'yup'
+import { useDispatch } from 'react-redux'
+
+import * as authAction from '../redux/actions/authAction'
 
 const formSchema = yup.object({
     // Want to validate email and PW using Yup
@@ -10,6 +13,8 @@ const formSchema = yup.object({
 })
 
 export default function LoginScreen(navData) {
+
+    const dispatch = useDispatch()
 
     return(
         <KeyboardAvoidingView
@@ -23,8 +28,13 @@ export default function LoginScreen(navData) {
                     }}
                     validationSchema={ formSchema }
                     onSubmit={(values) => {
-                        console.log(values)
-                        navData.navigation.navigate('Home')
+                        // console.log(values)
+                        dispatch(authAction.loginUser(values))
+                            .then(() => {
+                                navData.navigation.navigate('Home')
+                            })
+                            .catch(err => console.log(err))
+                        
                     }}
                 >
                     {(props) => (

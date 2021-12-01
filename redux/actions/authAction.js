@@ -40,6 +40,19 @@ export const loginUser = (authData) => {
     return async dispatch => {
 
         // logic to POST request to LOGIN the user
+        const result = await fetch(`${BASE_URL}/api/users/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email,
+                password
+            })
+        })
+
+        const resultData = await result.json()
+        console.log(resultData)
 
         dispatch({
             type: LOGIN_USER_SUCCESS,
