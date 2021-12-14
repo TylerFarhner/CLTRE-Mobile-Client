@@ -36,7 +36,7 @@ export default function LoginScreen(navData) {
                                 if(result.success) {
                                     try {
                                         await AsyncStorage.setItem('token', result.token)
-                                        navData.navigation.navigate('Home')
+                                        navData.navigation.navigate('TabNav')
                                     } catch(err) {
                                         console.log(err)
                                     }
