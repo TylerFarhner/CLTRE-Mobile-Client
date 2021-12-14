@@ -53,7 +53,10 @@ export default function RegisterScreen(navData) {
             <View style={styles.container}>
                 <View style={styles.logo}>
                 <Image
-                    source={require("../assets/images/MobileLogo.png")}
+                    // RED LOGO
+                    // source={require("../assets/images/MobileLogo.png")}
+                    // GREEN LOGO
+                    source={require("../assets/images/GreenMobileLogo.png")}
                     style={styles.image}
                 />
                 </View>

@@ -52,7 +52,10 @@ export default function LoginScreen(navData) {
                     {(props) => (
                         <View style={styles.container}>
                             <View style={styles.logo}>
-                                <Image source={require('../assets/images/MobileLogo.png')} style={styles.image}/>
+                                {/* RED LOGO */}
+                                {/* <Image source={require('../assets/images/MobileLogo.png')} style={styles.image}/> */}
+                                {/* GREEN LOGO */}
+                                <Image source={require('../assets/images/GreenMobileLogo.png')} style={styles.image}/>
                             </View>
                             <View>
                                 <TextInput

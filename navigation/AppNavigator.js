@@ -1,5 +1,5 @@
 import React from 'react'
-import {Image} from 'react-native'
+import {Image, View} from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
@@ -16,16 +16,19 @@ function AppNavigator() {
     
     function LogoTitle() {
         return (
-            <Image 
-                style={{ width: 50, height: 50 }}
-                source={require('../assets/images/MobileLogo.png')}
+            // <View style={{flexDirection: 'row', alignItems:  ,justifyContent: 'center'}}>
+                <Image 
+                style={{ width: 100, height: 50 }}
+                source={require('../assets/images/GreenMobileLogo.png')}
             />
+            // </View>
         )
     }
-    
+
     return(
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Home">
+            {/* <Stack.Navigator> */}
                 <Stack.Screen 
                     name="Login"
                     component={LoginScreen}
@@ -40,7 +43,7 @@ function AppNavigator() {
                     name="Home"
                     component={HomeScreen}
                     // TODO: Figure out why headerLeft: null wont remove back option IOS or Android
-                    options={{ headerTitle: (props) => <LogoTitle {...props} /> }}
+                    options={{ headerLeft: () => null,headerStyle: 'center',headerTitle: (props) => <LogoTitle {...props} /> }}
                 />
                 <Stack.Screen
                     name="Profile"
