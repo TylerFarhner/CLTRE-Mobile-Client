@@ -9,6 +9,7 @@ const Stack = createNativeStackNavigator();
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import Tabs from './TabNavigator'
+import DrawerNav from './DrawerNavigator';
 // import HomeScreen from '../screens/HomeScreen';
 // import UserProfileScreen from '../screens/UserProfileScreen';
 
@@ -72,7 +73,7 @@ function AppNavigator() {
 
     return(
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="TabNav">
+            <Stack.Navigator initialRouteName="TabsNav">
             {/* <Stack.Navigator> */}
                 <Stack.Screen 
                     name="Login"
@@ -85,7 +86,7 @@ function AppNavigator() {
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen 
-                    name="TabNav"
+                    name="TabsNav"
                     component={ Tabs }
                     options={{ headerShown: false }}
                 />
